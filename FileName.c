@@ -1,31 +1,44 @@
 #define _CRT_SECURE_NO_WARNINGS
+#include <time.h>
 #include<stdio.h>
-#include<math.h>
+int my_pow(int base, int exp)
+{
+	int result = 1;
+	for (int i = 0;i < exp;i++) {
+		result *= base;
+	}
+	return result;
+}
+
 int main(void)
 {
-	int N;
-	int n = 1;
+	int N = 0;
 	scanf("%d", &N);
-	int start = (int)pow(10, N - 1);
-	int end = (int)pow(10, N) - 1;
-	int i = start;
-	while (i <= end)
+	clock_t start = clock();
+	int num = 0;
+	int j = 0;
+	int sum = 0;
+int i = 0;
+int begin = my_pow(10, N - 1);
+int end = my_pow(10, N) - 1;
+for(num=begin;num<=end;num++)
+{  
+	sum = 0;
+	i = num;
+	for (j=0;j<N;j++) 
 	{
-
-		int t = i;
-		int sum = 0;
-		int n = 0;
-		do
-		{
-			int d = t % 10;
-			t /= 10;
-			sum += (int)pow(d,N);
-			n++;
-		} while (n<N);
-		if (sum == i) {
-			printf("%d\n", i);
+		int d = i % 10;
+		i /= 10;
+		sum +=my_pow(d, N);
+		
 		}
-			i++;
+	if (sum == num)
+	{
+			printf("%d\n", num);
 	}
+
+}
+	clock_t ed = clock();
+	printf("Time taken: %f seconds\n", ((double)(ed - start)) / CLOCKS_PER_SEC);
 	return 0;
 }
